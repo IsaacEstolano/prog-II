@@ -1,14 +1,12 @@
 const express = require('express');
 const app = express();
 
-app.get("/",(req,res)=>
-    res.send("lalala")
-);
+app.use("/public",express.static(__dirname + "/public"))
 
 app.get("/api/:date?",(req,res)=>{
     let dateParam = req.params.date;
     let date;
-
+    let timezone = req.query.tz || "UTC"
     if(!dateParam){
         date=new Date();
     }
@@ -25,12 +23,21 @@ app.get("/api/:date?",(req,res)=>{
     }
     
 
-    res.json({
+
+    const res= {
         unix:date.getTime(),
-        utc:date.toUTCString()
-    })
+        utc:date.toUTCString(),
+        timezone:date.toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" })
+    }
+
+    res.json(response)
 })
 
+app.use("/public",express.static(__dirname + "/public"))
+const absolutePath = __dirname + "/public/index.html"
+app.get("/",(req,res) =>{
+    res.sendFile(absolutePath)
+})
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT,()=>{
