@@ -14,8 +14,7 @@ btnConv.addEventListener('click', () => { // Função para converter data/timest
             dateOutput.innerHTML = data.error ?     // Aqui ta verificando se a resposta tem erro se der só aparece a mensagem de erro, se não der erro continua o código
                 `<span class="error">${data.error}</span>` :  // Transforma os dados para HTML o (${} é para colocar o valor da variável dentro do HTML)
                 `<strong>Unix:</strong> ${data.unix}<br>
-                 <strong>UTC:</strong> ${data.utc}<br>
-                 <strong>Data Local:</strong> ${data.diaSemana}, ${data.utclocal}`;
+                 <strong>UTC:</strong> ${data.utc}<br>`
         })
         .catch(() => {
             dateOutput.innerHTML = `<span class="error">Erro ao processar a requisição</span>`;  // Se der erro na requisição, aparece a mensagem de erro
@@ -31,7 +30,7 @@ btnCompare.addEventListener('click', () => { // Função para comparar datas
             diffResult.innerHTML = data.error ? 
                 `<span class="error">${data.error}</span>` : // Aqui faz o mesmo dali de cima
                 `<strong>Diferença:</strong><br>
-                 ${data.days} dias, ${data.hours} horas,
+                 ${data.hours} horas,
                  ${data.minutes} minutos, ${data.seconds} segundos`;
         })
         .catch(() => {
